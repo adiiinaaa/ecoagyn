@@ -14,3 +14,5 @@ results/*/manual_counts.json
 results/*/accuracy.json
 results/*/labels.csv
 results/*/count_error.csv
+tools/
+public_link.txt

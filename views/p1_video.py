@@ -70,9 +70,19 @@ def _from_inputs(key):
 
 
 def cloud_mode():
-    """Онлайн-версия (Streamlit Cloud): нейросети нет — только просмотр готовых результатов."""
+    """Режим «только просмотр»:
+    - онлайн-версия без нейросети (Streamlit Cloud);
+    - посетитель пришёл по публичной ссылке (туннель), а не с этого ноутбука / из домашней Wi‑Fi.
+    Так чужие люди не могут загружать видео и запускать обработку на ноутбуке."""
     import importlib.util
-    return importlib.util.find_spec("ultralytics") is None
+    if importlib.util.find_spec("ultralytics") is None:
+        return True
+    try:
+        host = (st.context.headers.get("Host") or "").split(":")[0].lower()
+    except Exception:
+        return False
+    local = host in ("", "localhost", "127.0.0.1", "[::1]") or host.startswith(("192.168.", "10.", "172."))
+    return not local
 
 
 def render():

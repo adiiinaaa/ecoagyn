@@ -54,7 +54,8 @@ def render():
 
     st.divider()
     st.caption("Параметрлерді (L, сағаттар) config.json-ға әдепкі мән ретінде сақтау:")
-    if st.button("L және уақыт параметрлерін config.json-ға сақтау"):
+    from views.p1_video import cloud_mode
+    if st.button("L және уақыт параметрлерін config.json-ға сақтау", disabled=cloud_mode()):
         c["road"]["segment_length_km"] = P["L"]
         c["road"]["active_hours_per_day"] = P["hours_day"]
         c["road"]["days_per_year"] = P["days_year"]

@@ -8,6 +8,7 @@ import pandas as pd
 import streamlit as st
 
 from core.analysis import annotated_video
+from views.p1_video import cloud_mode
 from core.accuracy import NOT_VEHICLE, confusion, count_error, evaluate, metrics
 from core.common import CLASS_ORDER, class_kz
 from views.state import cfg, current_run, fmt, show_fig
@@ -70,7 +71,8 @@ def render():
         cols = st.columns(4)
         counts = {cl: cols[i].number_input(f"{class_kz(c, cl)}", 0, 100000, int(man["counts"].get(cl, 0)))
                   for i, cl in enumerate(CLASS_ORDER)}
-        if st.button("Сақтау және есептеу", type="primary", icon=":material/calculate:"):
+        if st.button("Сақтау және есептеу", type="primary", icon=":material/calculate:", disabled=cloud_mode(),
+                     help="Тек компьютердегі нұсқада" if cloud_mode() else None):
             man = {"from_s": fr, "to_s": to, "counts": counts}
             (run["dir"] / "manual_counts.json").write_text(json.dumps(man, ensure_ascii=False, indent=2), "utf-8")
             run["manual"] = man
@@ -121,12 +123,14 @@ def render():
                 "true_class": st.column_config.SelectboxColumn("Дұрыс түрі", options=opts),
             }, hide_index=True, row_height=90, width="stretch", key=f"ed::{run['name']}::{page}")
         b1, b2 = st.columns(2)
-        if b1.button("Бос жолдарға болжамды көшіру", icon=":material/content_copy:", width="stretch"):
+        if b1.button("Бос жолдарға болжамды көшіру", icon=":material/content_copy:", width="stretch",
+                     disabled=cloud_mode()):
             p2 = part.copy()
             p2["true_class"] = p2["true_class"].fillna(p2["class"])
             _save_labels(labels, p2, lab_path)
             st.rerun()
-        if b2.button("Белгілерді сақтау", type="primary", icon=":material/save:", width="stretch"):
+        if b2.button("Белгілерді сақтау", type="primary", icon=":material/save:", width="stretch",
+                     disabled=cloud_mode()):
             _save_labels(labels, ed, lab_path)
             run["labels"] = pd.read_csv(lab_path)
             evaluate(run)
