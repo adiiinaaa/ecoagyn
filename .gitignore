@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+.claude/
+models/
+videos/
+results/*/annotated.mp4
+results/*/_annotated_tmp.mp4
+results/*/crops/
+results/*/word/
+results/*/*.zip
+results/*/report_*.html
+results/*/manual_counts.json
+results/*/accuracy.json
+results/*/labels.csv
+results/*/count_error.csv

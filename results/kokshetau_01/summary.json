@@ -1,0 +1,48 @@
+{
+  "video": "..\\videos\\kokshetau_01.mov",
+  "video_name": "kokshetau_01.mov",
+  "fps": 29.999999985709522,
+  "width": 1920,
+  "height": 1080,
+  "from_s": 0.0,
+  "to_s": 699.73,
+  "duration_s": 699.73,
+  "line": [
+    [
+      1568,
+      704
+    ],
+    [
+      46,
+      679
+    ]
+  ],
+  "direction_names": [
+    "1-бағыт",
+    "2-бағыт"
+  ],
+  "model": "yolo11s.pt",
+  "confidence": 0.3,
+  "frame_step": 2,
+  "imgsz": 960,
+  "processing_s": 496.2,
+  "counts": {
+    "car": {
+      "1": 50,
+      "2": 98
+    },
+    "bus": {
+      "1": 2,
+      "2": 2
+    },
+    "truck": {
+      "1": 7,
+      "2": 5
+    },
+    "motorcycle": {
+      "1": 0,
+      "2": 0
+    }
+  },
+  "total": 164
+}

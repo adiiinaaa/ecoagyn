@@ -1,0 +1,528 @@
+{
+  "_note": "EcoAgyn параметрлері. Барлық коэффициенттер ресми дереккөзден алынған (әр жазбада 'source'). Мәндерді сайт интерфейсінде өзгертуге болады — бұл файл тек әдепкі мәндер.",
+  "_note_ru": "Все значения по умолчанию. Любой параметр можно изменить в интерфейсе сайта; изменения можно сохранить обратно в этот файл кнопкой на странице.",
+  "paths": {
+    "video_dirs": [
+      "videos",
+      "../videos"
+    ],
+    "results_dir": "results",
+    "models_dir": "models"
+  },
+  "detection": {
+    "model": "yolo11s.pt",
+    "confidence": 0.3,
+    "imgsz": 960,
+    "frame_step": 2,
+    "device": "auto",
+    "tracker": "bytetrack.yaml",
+    "annotated_max_width": 1280,
+    "source": "Баптау параметрлері (коэффициент емес). YOLO11: Ultralytics, 2024, https://docs.ultralytics.com/models/yolo11/ ; ByteTrack: Zhang et al., ECCV 2022, https://arxiv.org/abs/2110.06864"
+  },
+  "classes": {
+    "car": {
+      "kz": "Жеңіл көліктер",
+      "coco_id": 2
+    },
+    "bus": {
+      "kz": "Автобустар",
+      "coco_id": 5
+    },
+    "truck": {
+      "kz": "Жүк көліктері",
+      "coco_id": 7
+    },
+    "motorcycle": {
+      "kz": "Мотоциклдер",
+      "coco_id": 3
+    }
+  },
+  "privacy": {
+    "blur_plates": true,
+    "blur_faces": true,
+    "plate_band": [
+      0.4,
+      1.0
+    ],
+    "plate_band_width": [
+      0.06,
+      0.94
+    ],
+    "head_fraction": 0.3,
+    "source": "Баптау параметрлері (рамкадағы үлестер). Нөмірлер мен беттер танылмайды және сақталмайды: сақталатын әр кадрда, видеода және кескіндемеде көлік рамкасының төменгі бөлігі (нөмір аймағы) және адамдардың басы бұлдырлатылады."
+  },
+  "fuels": {
+    "_source": "Тығыздық: EMEP/EEA air pollutant emission inventory guidebook 2023 – Update 2026, 1.A.3.b.i-iv Road transport, Table 3-28 'Default calorific and density values'. CO2 (base): сол құжат, Table 3-12 'Tier 1 CO2 emission factors' (kg CO2 / kg fuel, 100% тотығу). CO2 (low/high): 2006 IPCC Guidelines, Vol. 2 Energy, Ch. 3 Mobile Combustion, Table 3.2.1 (95% сенім аралығы, kg CO2/TJ) × Vol. 2 Ch. 1 Table 1.2 (NCV, TJ/Gg). https://www.eea.europa.eu/en/analysis/publications/emep-eea-guidebook-2023 ; https://www.ipcc-nggip.iges.or.jp/public/2006gl/vol2.html",
+    "petrol": {
+      "kz": "Бензин",
+      "density_kg_per_l": 0.75,
+      "co2_kg_per_kg": 3.168,
+      "ipcc_ef_kg_per_tj": {
+        "low": 67500,
+        "base": 69300,
+        "high": 73000
+      },
+      "ipcc_ncv_tj_per_gg": 44.3
+    },
+    "diesel": {
+      "kz": "Дизель",
+      "density_kg_per_l": 0.84,
+      "co2_kg_per_kg": 3.18,
+      "ipcc_ef_kg_per_tj": {
+        "low": 72600,
+        "base": 74100,
+        "high": 74800
+      },
+      "ipcc_ncv_tj_per_gg": 43.0
+    },
+    "lpg": {
+      "kz": "Сұйытылған газ (пропан-бутан)",
+      "density_kg_per_l": 0.52,
+      "co2_kg_per_kg": 3.031,
+      "ipcc_ef_kg_per_tj": {
+        "low": 61600,
+        "base": 63100,
+        "high": 65600
+      },
+      "ipcc_ncv_tj_per_gg": 47.3
+    },
+    "cng": {
+      "kz": "Сығылған табиғи газ (литр — сығылған күйде, 175 кг/м³)",
+      "density_kg_per_l": 0.175,
+      "co2_kg_per_kg": 2.749,
+      "ipcc_ef_kg_per_tj": {
+        "low": 54300,
+        "base": 56100,
+        "high": 58300
+      },
+      "ipcc_ncv_tj_per_gg": 48.0
+    }
+  },
+  "tier1_ef_g_per_kg_fuel": {
+    "_source": "EMEP/EEA air pollutant emission inventory guidebook 2023 – Update 2026, 1.A.3.b.i-iv Road transport, Table 3-5 (CO, NMVOC), Table 3-6 (NOx, PM), Table 3-7 (N2O, NH3). Мәндер: [Mean, Min, Max], г / кг отын. Min — 2010 жылғы ең жаңа технология, Max — бақыланбайтын (ескі) технология. PM = PM2.5 (сол құжат, Table 3-1: 'Coarse exhaust PM is considered to be negligible, hence PM=PM2.5'). https://www.eea.europa.eu/en/analysis/publications/emep-eea-guidebook-2023/part-b-sectoral-guidance-chapters/1-energy/1-a-combustion/1-a-3-b-i",
+    "PC": {
+      "petrol": {
+        "CO": [
+          48.36,
+          8.6,
+          338.69
+        ],
+        "NOx": [
+          3.98,
+          0.44,
+          30.49
+        ],
+        "PM2.5": [
+          0.02,
+          0.004,
+          0.042
+        ],
+        "NMVOC": [
+          7.75,
+          1.15,
+          176.89
+        ],
+        "N2O": [
+          0.07,
+          0.01,
+          0.21
+        ],
+        "NH3": [
+          0.84,
+          0.02,
+          1.93
+        ]
+      },
+      "diesel": {
+        "CO": [
+          2.41,
+          0.52,
+          11.23
+        ],
+        "NOx": [
+          11.77,
+          7.79,
+          14.84
+        ],
+        "PM2.5": [
+          0.78,
+          0.002,
+          4.772
+        ],
+        "NMVOC": [
+          0.51,
+          0.02,
+          3.26
+        ],
+        "N2O": [
+          0.11,
+          0.03,
+          0.19
+        ],
+        "NH3": [
+          0.02,
+          0.01,
+          0.04
+        ]
+      },
+      "lpg": {
+        "CO": [
+          58.22,
+          14.56,
+          139.93
+        ],
+        "NOx": [
+          5.48,
+          0.9,
+          41.45
+        ],
+        "PM2.5": [
+          0.03,
+          0.012,
+          0.042
+        ],
+        "NMVOC": [
+          9.43,
+          1.48,
+          20.85
+        ],
+        "N2O": [
+          0.16,
+          0.02,
+          0.35
+        ],
+        "NH3": [
+          1.02,
+          0.03,
+          1.85
+        ]
+      }
+    },
+    "LCV": {
+      "petrol": {
+        "CO": [
+          118.7,
+          11.75,
+          356.95
+        ],
+        "NOx": [
+          5.93,
+          0.33,
+          37.31
+        ],
+        "PM2.5": [
+          0.02,
+          0.005,
+          0.034
+        ],
+        "NMVOC": [
+          7.42,
+          0.67,
+          53.99
+        ],
+        "N2O": [
+          0.1,
+          0.01,
+          0.35
+        ],
+        "NH3": [
+          0.77,
+          0.02,
+          2.04
+        ]
+      },
+      "diesel": {
+        "CO": [
+          6.81,
+          4.82,
+          21.77
+        ],
+        "NOx": [
+          13.48,
+          10.43,
+          27.86
+        ],
+        "PM2.5": [
+          1.22,
+          0.002,
+          4.772
+        ],
+        "NMVOC": [
+          1.23,
+          0.48,
+          2.86
+        ],
+        "N2O": [
+          0.07,
+          0.03,
+          0.14
+        ],
+        "NH3": [
+          0.01,
+          0.01,
+          0.03
+        ]
+      }
+    },
+    "HDV": {
+      "diesel": {
+        "CO": [
+          6.1,
+          2.79,
+          13.8
+        ],
+        "NOx": [
+          25.95,
+          10.48,
+          47.22
+        ],
+        "PM2.5": [
+          0.55,
+          0.015,
+          2.448
+        ],
+        "NMVOC": [
+          0.9,
+          0.13,
+          7.01
+        ],
+        "N2O": [
+          0.07,
+          0.02,
+          0.23
+        ],
+        "NH3": [
+          0.02,
+          0.01,
+          0.11
+        ]
+      },
+      "cng": {
+        "CO": [
+          3.98,
+          2.2,
+          15.12
+        ],
+        "NOx": [
+          17.1,
+          9.67,
+          29.73
+        ],
+        "PM2.5": [
+          0.02,
+          0.019,
+          0.036
+        ],
+        "NMVOC": [
+          0.14,
+          0.06,
+          0.39
+        ],
+        "N2O": [
+          0.27,
+          0.18,
+          0.33
+        ]
+      }
+    },
+    "L": {
+      "petrol": {
+        "CO": [
+          244.88,
+          8.46,
+          588.11
+        ],
+        "NOx": [
+          7.23,
+          0.89,
+          22.06
+        ],
+        "PM2.5": [
+          0.51,
+          0.058,
+          6.599
+        ],
+        "NMVOC": [
+          92.74,
+          6.47,
+          323.68
+        ],
+        "N2O": [
+          0.05,
+          0.04,
+          0.09
+        ],
+        "NH3": [
+          0.05,
+          0.04,
+          0.11
+        ]
+      }
+    }
+  },
+  "pollutants_main": [
+    "CO",
+    "NOx",
+    "PM2.5"
+  ],
+  "pollutants_extra": [
+    "NMVOC",
+    "N2O",
+    "NH3"
+  ],
+  "fc_source": "Отын шығыны (г/км): EMEP/EEA Guidebook 2023 – Update 2026, 1.A.3.b.i-iv, Table 3-15 'Tier 1 — Typical fuel consumption figures, per km' (base, мұнда бар болса) және Table 3-27 'Tier 2 average fuel/energy consumption values' (low/high). л/100 км = (г/км) / (тығыздық кг/л × 1000) × 100.",
+  "categories": {
+    "_note": "1-модель: YOLO көлік түрлері бойынша. 'tier1' — ластаушы коэффициенттерінің жолы (PC, LCV, HDV, L). fc_g_per_km: [low, base, high].",
+    "car": {
+      "default_fuel": "petrol",
+      "fuels": {
+        "petrol": {
+          "tier1": "PC",
+          "fc_g_per_km": [
+            53,
+            61.9,
+            95
+          ],
+          "why": "low: Table 3-27 Petrol Small Euro 1+ (53); base: Table 3-15 PC Petrol (61.9); high: Table 3-27 Petrol Large-SUV PRE-ECE..open loop (95)"
+        },
+        "diesel": {
+          "tier1": "PC",
+          "fc_g_per_km": [
+            51,
+            56.8,
+            75
+          ],
+          "why": "low: Table 3-27 Diesel Small Euro 4+ (51); base: Table 3-15 PC Diesel (56.8); high: Table 3-27 Diesel Large-SUV Conventional (75)"
+        },
+        "lpg": {
+          "tier1": "PC",
+          "fc_g_per_km": [
+            56,
+            58.1,
+            59
+          ],
+          "why": "low: Table 3-27 LPG Euro 1+ (56); base: Table 3-15 PC LPG (58.1); high: Table 3-27 LPG Conventional (59)"
+        }
+      }
+    },
+    "motorcycle": {
+      "default_fuel": "petrol",
+      "fuels": {
+        "petrol": {
+          "tier1": "L",
+          "fc_g_per_km": [
+            19,
+            27.7,
+            48
+          ],
+          "why": "low: Table 3-27 Motorcycles 2-stroke >50 cm3 Euro 3+ (19); base: Table 3-15 L-category Petrol (27.7); high: Table 3-27 Motorcycles 4-stroke >750 cm3 Euro 1+ (48)"
+        }
+      }
+    },
+    "bus": {
+      "default_fuel": "diesel",
+      "fuels": {
+        "diesel": {
+          "tier1": "HDV",
+          "fc_g_per_km": [
+            257,
+            319,
+            366
+          ],
+          "why": "low: Table 3-27 Coaches diesel standard Euro I+ (257); base: Table 3-27 Urban diesel buses standard Euro I+ (319); high: сол, Conventional (366)"
+        },
+        "cng": {
+          "tier1": "HDV",
+          "fc_g_per_km": [
+            348,
+            405.5,
+            555
+          ],
+          "why": "low: Table 3-27 Urban CNG buses Euro VI (348); base: Table 3-15 HDV CNG (buses) (405.5); high: Table 3-27 Urban CNG buses HD Euro I (555)"
+        }
+      }
+    },
+    "truck": {
+      "default_fuel": "diesel",
+      "fuels": {
+        "diesel": {
+          "tier1": "HDV",
+          "fc_g_per_km": [
+            79.0,
+            216.8,
+            306
+          ],
+          "why": "YOLO 'truck' класы жеңіл коммерциялықтан ауыр жүк көлігіне дейін қамтиды. low: Table 3-15 LCV Diesel (79.0); base: Table 3-15 HDV Diesel (216.8); high: Table 3-27 Heavy-duty trucks >32 t Euro I+ (306)"
+        },
+        "petrol": {
+          "tier1": "LCV",
+          "fc_g_per_km": [
+            68,
+            72.5,
+            177
+          ],
+          "why": "low: Table 3-27 LCV Petrol Euro 1+ (68); base: Table 3-15 LCV Petrol (72.5); high: Table 3-27 Heavy-duty trucks Petrol >3.5 t Conventional (177)"
+        }
+      }
+    }
+  },
+  "model0": {
+    "fuel": "petrol",
+    "tier1": "PC",
+    "fc_g_per_km": [
+      53,
+      61.9,
+      95
+    ],
+    "why": "0-модель: барлық көлік бір орташа жеңіл бензин көлігі ретінде. Мәндер 'categories.car.petrol' сияқты (Table 3-15, 3-27)."
+  },
+  "road": {
+    "segment_length_km": 1.0,
+    "segment_length_source": "Пайдаланушы өлшемі (бақыланатын жол учаскесінің ұзындығы, мысалы 2GIS/Google Maps картасы бойынша). Әдепкі 1 км — тек бастапқы мән, интерфейсте міндетті түрде өзгертіңіз.",
+    "active_hours_per_day": 16,
+    "days_per_year": 365,
+    "time_source": "Пайдаланушы таңдауы: тәулігіне белсенді қозғалыс сағаттары және жылдағы күн саны. Жылдық мән — тек есептік бағалау."
+  },
+  "uncertainty": {
+    "mc_runs": 10000,
+    "mc_seed": 42,
+    "segment_length_rel": 0.1,
+    "distribution": "triangular",
+    "default_count_error_pct": 10,
+    "source": "Әдістеме: IPCC 2006 Guidelines, Vol. 1, Ch. 3 'Uncertainties' (Approach 2 — Monte Carlo, 5–95% аралығы). Сандардың қателігі 3-бөлімнен алынады; ол жоқ болса default_count_error_pct қолданылады (баптау параметрі). L ±10% — тапсырма бойынша."
+  },
+  "scenario": {
+    "car_occupancy": {
+      "low": 1.1,
+      "base": 1.54,
+      "high": 1.8,
+      "source": "EEA indicator TERM 029 'Occupancy rates of passenger vehicles': Батыс Еуропа ≈1.54 адам/көлік (2007), Шығыс Еуропа ≈1.8; жұмысқа сапар 1.1–1.2 (IEA, сол индикатор бойынша). https://www.eea.europa.eu/en/analysis/indicators/occupancy-rates-of-passenger-vehicles"
+    },
+    "bus_capacity": {
+      "low": 80,
+      "base": 85,
+      "high": 100,
+      "source": "Yutong ZK6128HG (Қазақстан қалаларында кең таралған 12 м қалалық автобус) — номиналды сыйымдылық 86 адам жүргізушімен (85 жолаушы); ZK6128HGK нұсқалары 81 және 101 (жүргізушімен). https://auto-che.com/v/zk/zk6128hg-70-yutong.html , https://auto-che.com/v/zk/zk6128hgk-239-yutong.html"
+    },
+    "bus_occupancy": {
+      "low": 8.3,
+      "base": 11.8,
+      "high": 11.8,
+      "source": "UK Department for Transport, Bus statistics BUS03 (жолаушы-миль / көлік-миль): Англия, Лондоннан тыс 2004/05 — 8.3; Ұлыбритания 2019/20 — ≈11.8. https://www.gov.uk/government/collections/bus-statistics . Қазақстан бойынша ресми орташа мән табылмады — өз қалаңыз үшін интерфейсте өзгертіңіз."
+    },
+    "preset_points": [
+      0,
+      10,
+      20,
+      30,
+      50
+    ]
+  },
+  "equivalents": {
+    "tree_seedling_10y_t_co2": 0.06,
+    "forest_t_co2_per_acre_year": 1.0,
+    "acre_to_ha": 0.404686,
+    "car_t_co2_per_year": 4.29,
+    "source": "U.S. EPA, Greenhouse Gas Equivalencies Calculator — Calculations and References (жаңартылған 2026): 10 жыл өсірілген қала ағашының көшеті 0.060 т CO2; АҚШ орманының 1 акры жылына 1.00 т CO2; бензин жеңіл көлігі жылына 4.29 т CO2e. 1 акр = 0.404686 га (халықаралық анықтама). https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator-calculations-and-references"
+  }
+}

@@ -1,0 +1,27 @@
+[server]
+# Видео с телефона бывают большими (до 4 ГБ)
+maxUploadSize = 4096
+headless = true
+
+[browser]
+gatherUsageStats = false
+
+[client]
+toolbarMode = "minimal"
+
+[theme]
+base = "light"
+# Шрифты: Golos Text — основной текст, Literata — заголовки и крупные числа (оба с казахскими буквами)
+font = "Golos Text:https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap"
+headingFont = "Literata:https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,600;7..72,700&display=swap"
+primaryColor = "#167D61"
+backgroundColor = "#F6F8FA"
+secondaryBackgroundColor = "#EEF3F0"
+textColor = "#182522"
+borderColor = "#E2E9E5"
+baseRadius = "12px"
+showWidgetBorder = true
+
+[theme.sidebar]
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F3F6F4"

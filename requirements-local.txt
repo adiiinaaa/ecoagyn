@@ -1,0 +1,13 @@
+torch
+torchvision
+ultralytics>=8.3
+lap
+opencv-python
+streamlit>=1.50
+streamlit-image-coordinates
+pandas
+numpy
+scipy
+matplotlib
+imageio-ffmpeg
+truststore

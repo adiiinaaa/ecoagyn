@@ -1,0 +1,11 @@
+# Онлайн-версия (Streamlit Cloud): только просмотр результатов, без нейросети.
+# Для компьютера с обработкой видео: pip install -r requirements-local.txt
+streamlit>=1.50
+streamlit-image-coordinates
+pandas
+numpy
+scipy
+matplotlib
+pillow
+opencv-python-headless
+truststore
