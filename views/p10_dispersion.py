@@ -43,10 +43,7 @@ def _inputs(c):
     """Блок ввода параметров. Возвращает словарь параметров модели."""
     d = c["dispersion"]
     st.subheader("1. Метеорология және геометрия")
-    a, b = st.columns(2)
-    u = a.number_input("Желдің жылдамдығы u, м/с (10 м биіктікте)", 0.1, 30.0, float(d["wind_speed_ms"]), 0.5)
-    theta = b.number_input("Жел мен жол арасындағы бұрыш θ, ° (90° — жолға көлденең)", 0.0, 90.0,
-                           float(d["wind_angle_deg"]), 5.0)
+    u = st.number_input("Желдің жылдамдығы u, м/с (10 м биіктікте)", 0.1, 30.0, float(d["wind_speed_ms"]), 0.5)
 
     mode = st.radio("Атмосфераның тұрақтылық класы (Пасквилл)", ["Қолмен таңдау", "Пасквилл кестесі бойынша"],
                     horizontal=True)
@@ -73,7 +70,7 @@ def _inputs(c):
     z = b.number_input("Бақылау нүктесі z, м (тыныс алу деңгейі)", 0.0, 10.0, float(d["receptor_height_m"]), 0.1)
     sz0 = e.number_input("Бастапқы шашырау σz0, м (жорамал)", 0.0, 10.0, float(d["sigma_z0_m"]), 0.1,
                          help="Көліктер тудыратын турбуленттілік. Әдепкі 1,5 м — жорамал, MODULE_NOTES.md қараңыз.")
-    return {"u": u, "theta": theta, "stability": stab, "stab_note": stab_note, "h": h, "z": z, "sz0": sz0}
+    return {"u": u, "stability": stab, "stab_note": stab_note, "h": h, "z": z, "sz0": sz0}
 
 
 def render():
@@ -85,8 +82,6 @@ def render():
            "қандай ауамен тыныс алады.", "Экология")
 
     m = _inputs(c)
-    for _, text in model_warnings(m["u"], m["theta"]):
-        note(text, "⚠")
 
     st.subheader("2. Фон және норматив")
     norms, norms_doc = load_norms(c)
@@ -100,6 +95,26 @@ def render():
     for col, p in zip(cols, POLLUTANTS):
         v = col.number_input(f"Фон {NAME_KZ[p]}, {DISPLAY_UNIT[p]}", 0.0, 1e6, 0.0, 1.0 if DISPLAY_UNIT[p] == "мкг/м³" else 0.1)
         bg[p] = from_display(v, p)
+
+    if m["u"] < 1.0:
+        note(model_warnings(m["u"], 90)[0][1], "⚠")
+
+    t1, t2 = st.tabs(["1-нұсқа: жол (қашықтық профилі)", "2-нұсқа: дау картасы (жол + қазандық)"])
+    with t1:
+        _version1(c, run, P, d, m, norms, norm_type, bg)
+    with t2:
+        from views.p10_map import render_map
+        render_map(c, run, P, m, norms, norm_type, bg)
+
+
+def _version1(c, run, P, d, m, norms, norm_type, bg):
+    """Версия 1: дорога как линейный источник, профиль C(x)."""
+    m = dict(m)
+    m["theta"] = st.number_input("Жел мен жол арасындағы бұрыш θ, ° (90° — жолға көлденең)", 0.0, 90.0,
+                                 float(d["wind_angle_deg"]), 5.0)
+    for code, text in model_warnings(m["u"], m["theta"]):
+        if code == "parallel":
+            note(text, "⚠")
 
     # ---------- q ----------
     st.subheader("3. Көздің қуаты q")
