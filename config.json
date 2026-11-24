@@ -524,5 +524,26 @@
     "acre_to_ha": 0.404686,
     "car_t_co2_per_year": 4.29,
     "source": "U.S. EPA, Greenhouse Gas Equivalencies Calculator — Calculations and References (жаңартылған 2026): 10 жыл өсірілген қала ағашының көшеті 0.060 т CO2; АҚШ орманының 1 акры жылына 1.00 т CO2; бензин жеңіл көлігі жылына 4.29 т CO2e. 1 акр = 0.404686 га (халықаралық анықтама). https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator-calculations-and-references"
+  },
+  "dispersion": {
+    "wind_speed_ms": 3.0,
+    "wind_angle_deg": 90.0,
+    "stability": "D",
+    "emission_height_m": 0.5,
+    "receptor_height_m": 1.5,
+    "sigma_z0_m": 1.5,
+    "x_min_m": 5.0,
+    "x_max_m": 500.0,
+    "table_distances_m": [
+      10,
+      25,
+      50,
+      100,
+      200,
+      500
+    ],
+    "norm_type": "max_single",
+    "source": "Модель: гауссова модель бесконечного линейного источника (Pasquill, 1961; Turner, 1970, Workbook of Atmospheric Dispersion Estimates). σz, σy — Briggs (1973), городская местность. u, θ, класс, h, z — ввод пользователя (значения здесь — только начальные). σz0 = 1,5 м — допущение о перемешивании воздуха машинами, меняется в интерфейсе.",
+    "norms_file": "norms.json"
   }
 }

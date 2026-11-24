@@ -14,7 +14,7 @@ st.set_page_config(page_title="EcoAgyn", page_icon=str(ROOT / "assets" / "logo.s
 
 from core.report import build_report  # noqa: E402
 from views import (p1_video, p3_accuracy, p4_emissions, p5_uncertainty, p6_flow,  # noqa: E402
-                   p7_scenarios, p8_ecology, p9_method)
+                   p7_scenarios, p8_ecology, p9_method, p10_dispersion)
 from views.state import run_names  # noqa: E402
 from views.ui import inject_css  # noqa: E402
 
@@ -34,6 +34,7 @@ PAGES = {
         st.Page(p7_scenarios.render, title="Сценарийлер", icon=":material/directions_bus:", url_path="scenarios"),
     ],
     "Экология": [
+        st.Page(p10_dispersion.render, title="Ластанудың таралуы", icon=":material/air:", url_path="dispersion"),
         st.Page(p8_ecology.render, title="Экологиялық қорытынды", icon=":material/eco:", url_path="ecology"),
     ],
     "Әдістеме": [
